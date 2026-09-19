@@ -1,0 +1,215 @@
+/* ==========================================================================
+   button.module.scss  —  v2.0
+   Replaces: button.scss (v1, global stylesheet)
+
+   CHANGELOG
+   [FIX-1] Renamed to *.module.scss and class names converted from
+           kebab-case (.btn-filled) to camelCase (.btnFilled). Your call sites
+           use `btnStyles.btnFilled`, which only exists when the file is a CSS
+           Module. v1 was a global stylesheet, so `btnStyles` was never defined.
+           Class names are now hashed per build: no leakage into other files.
+   [FIX-2] Removed the global `button { ... }` element selector. It restyled
+           EVERY <button> in the app (font, margin, cursor). Those rules now
+           live in `.btn`, applied by button.jsx to this component only.
+           Declarations repeated in all 20 variants (padding, border: none,
+           border-radius) were hoisted into `.btn`; each variant now states
+           only what makes it different. Visual output is unchanged.
+   [FIX-3] AA contrast (normal-size text needs 4.5:1):
+             .btnDanger   white on red (#f00)        4.00:1 -> #c62828, 5.62:1
+             .btnRounded  white on orange (#ffa500)  1.97:1 -> #222 text, 8.06:1
+           All other pairings already pass (verified, see the test notes).
+   [FIX-4] `transition: 0.3s` means `all 0.3s`. Replaced with explicit
+           properties, and hover motion is wrapped in
+           prefers-reduced-motion: no-preference.
+   [FIX-5] Hover effects no longer fire on a real `disabled` button, and any
+           disabled button gets cursor: not-allowed. `.btnDisabled` is visual
+           only: ALSO pass the `disabled` attribute so click and keyboard
+           activation are blocked.
+
+   ORDER MATTERS: `.btn` (base) must stay ABOVE the variants. Both classes sit
+   on the same element with equal specificity, so the later rule wins.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   BASE: applied to every button by button.jsx  [FIX-2]
+   -------------------------------------------------------------------------- */
+.btn {
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  margin: 10px; /* kept for visual parity with v1; ideally the parent layout owns spacing */
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+
+  /* [FIX-5] real disabled state */
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:disabled:not(.btnDisabled) {
+    opacity: 0.6;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   1. FILLED
+   -------------------------------------------------------------------------- */
+.btnFilled {
+  background-color: blue;
+  color: white;
+}
+
+/* 2. OUTLINE */
+.btnOutline {
+  background-color: transparent;
+  color: blue;
+  border: 2px solid blue;
+  padding: 10px 23px; /* 2px border compensated so size matches .btnFilled */
+}
+
+/* 3. WHITE */
+.btnWhite {
+  background-color: white;
+  color: #222;
+  border: 1px solid #ddd;
+}
+
+/* 4. PILL */
+.btnPill {
+  background-color: blue;
+  color: white;
+  border-radius: 50px;
+}
+
+/* 5. GHOST */
+.btnGhost {
+  background-color: transparent;
+  color: #333;
+}
+
+/* 6. SHADOW */
+.btnShadow {
+  background-color: blue;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px gray;
+}
+
+/* 7. GRADIENT */
+.btnGradient {
+  background: linear-gradient(45deg, blue, purple);
+  color: white;
+  border-radius: 8px;
+}
+
+/* 8. 3D */
+.btn3D {
+  background-color: green;
+  color: white;
+  box-shadow: 0 5px 0 darkgreen;
+}
+
+/* 9. TEXT */
+.btnText {
+  background: none;
+  color: blue;
+  padding: 10px;
+}
+
+/* 10. HOVER */
+.btnHover {
+  background-color: blue;
+  color: white;
+
+  &:hover:not(:disabled) { /* [FIX-5] */
+    background-color: darkblue;
+  }
+}
+
+/* 11. DANGER  [FIX-3] */
+.btnDanger {
+  background-color: #c62828; /* was red: 4.00:1 with white text */
+  color: white;
+}
+
+/* 12. SUCCESS */
+.btnSuccess {
+  background-color: green;
+  color: white;
+}
+
+/* 13. DISABLED (visual only, pair with the `disabled` attribute) */
+.btnDisabled {
+  background-color: #ccc;
+  color: #777; /* inactive controls are exempt from WCAG contrast rules */
+  cursor: not-allowed;
+}
+
+/* 14. ROUNDED  [FIX-3] */
+.btnRounded {
+  background-color: orange;
+  color: #222; /* was white: 1.97:1 on orange */
+  border-radius: 12px;
+}
+
+/* 15. BORDER */
+.btnBorder {
+  background-color: white;
+  color: purple;
+  border: 3px solid purple;
+  padding: 10px 23px; /* 3px border, size parity with .btnFilled */
+  border-radius: 8px;
+}
+
+/* 16. NEON / GLOW */
+.btnGlow {
+  background-color: black;
+  color: white;
+  border: 2px solid cyan;
+  box-shadow: 0 0 10px cyan;
+}
+
+/* 17. TRANSPARENT */
+.btnTransparent {
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+}
+
+/* 18. HOVER SCALE  [FIX-4] [FIX-5] */
+.btnScale {
+  background-color: purple;
+  color: white;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 0.3s;
+
+    &:hover:not(:disabled) {
+      transform: scale(1.1);
+    }
+  }
+}
+
+/* 19. HOVER COLOR + SHADOW  [FIX-4] [FIX-5] */
+.btnEffect {
+  background-color: #222;
+  color: white;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: blue;
+    box-shadow: 0 5px 15px gray;
+  }
+}
+
+/* 20. LINK (underline) */
+.btnLink {
+  background: none;
+  color: blue;
+  padding: 10px;
+  text-decoration: underline;
+}

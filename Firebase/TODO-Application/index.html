@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <main>
+        <div class="page-box">
+            <div class="form-box">
+                <div class="form-box-content" id="signup_form_box">
+                    <h1>Sign Up</h1>
+                    <div class="form-section">
+                        <!-- <form action="" id="signup_form"></form> -->
+                        <!-- --> 
+                        <div class="form-field">
+                            <label for="name">Name</label>
+                            <input type="text" id="signup_name" name="" tabindex="1" placeholder="Enter You Full Name">
+                        </div>
+                        <div class="form-field">
+                            <label for="email">Email</label>
+                            <input type="email" id="signup_email" name="" tabindex="2" placeholder="Enter You Email">
+                        </div>
+                        <!-- -->
+                        <div class="form-field">
+                            <label for="phone">Phone</label>
+                            <input type="text" id="signup_phone" name="" tabindex="3" placeholder="Enter You Phone">
+                        </div>
+                        <div class="form-field">
+                            <label for="country">Country</label>
+                            <input type="text" id="signup_country" name="" tabindex="4" placeholder="Enter You Country">
+                        </div>
+                        <div class="form-field">
+                            <label for="education">Education</label>
+                            <select id="signup_education" name="education" class="education-select" tabindex="5">
+                                <option value="" disabled selected>Select your education</option>
+                                <option value="high-school">High School</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="bachelors">Bachelor's Degree</option>
+                                <option value="masters">Master's Degree</option>
+                                <option value="phd">PhD</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="age">Age</label>
+                            <select id="signup_age" name="age" tabindex="6">
+                                <option value="">Select age range</option>
+                                <option value="18-24">18–24</option>
+                                <option value="25-34">25–34</option>
+                                <option value="35-44">35–44</option>
+                                <option value="45-54">45–54</option>
+                                <option value="55-64">55–64</option>
+                                <option value="65+">65+</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="password">Password</label>
+                            <input type="password" id="signup_password" name="" tabindex="7"
+                                placeholder="Enter You Password">
+                        </div>
+                        <!---->
+                        <div class="form-field">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="signup_confirm_password" name="" tabindex="8"
+                                placeholder="Confirm You Password">
+                        </div>
+                        <div class="action-btn-wrapper">
+                            <!-- <button class="action-btn" id="signup_btn">Submit</button> -->
+                            <button type="button" class="action-btn" id="signup_btn" tabindex="9">Submit</button>
+                        </div>
+
+                    </div>
+                    <p class="center-align cursor-pointer">Already have an account? <span id="show_signin_box">Sign In</span></p>
+                </div>
+                <div class="form-box-content" id="signin_form_box">
+                    <h1>Sign In</h1>
+                    <div class="form-section">
+                        <div class="form-field">
+                            <label for="email">Email</label>
+                            <input type="email" id="signin_email" name="" tabindex="2" placeholder="Enter You Email">
+                        </div>
+                        <div class="form-field">
+                            <label for="password">Password</label>
+                            <input type="password" id="signin_password" name="" tabindex="2"
+                                placeholder="Enter You Password">
+                        </div>
+                        <div class="action-btn-wrapper">
+                            <!-- <button class="action-btn" id="signup_btn">Submit</button> -->
+                            <button type="button" class="action-btn" id="signin_btn">Submit</button>
+                        </div>
+                    </div>
+                    <p class="center-align cursor-pointer">Don't have an account? <span id="show_signup_box">Sign Up</span></p>
+                </div>
+                <div id="user_loggedin_box">
+                    Welcome <span id="username"></span>
+                    <div class="form-section">
+                        <div class="action-btn-wrapper">
+                            <button type="button" class="action-btn" id="logout_btn">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="module" src="assets/js/script.js" defer></script>
+</body>
+
+</html>

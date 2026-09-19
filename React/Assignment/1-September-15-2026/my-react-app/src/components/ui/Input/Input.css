@@ -1,0 +1,212 @@
+/* ========================================
+   COMMON INPUT STYLES
+   (shared by every variant, applied by input.jsx)
+======================================== */
+
+.input-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  width: 280px;
+  max-width: 100%;
+  margin: 10px;
+  vertical-align: top;
+  text-align: left; /* the starter #root centers text */
+}
+
+.input-label {
+  margin-bottom: 6px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-h, #222); /* follows the light/dark theme from index.css */
+}
+
+.input-required {
+  color: #c62828;
+}
+
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  font-size: 16px; /* 16px+ stops iOS Safari from zooming on focus */
+  padding: 12px 14px;
+  background-color: white;
+  color: #222;
+  border: 1px solid #757575;
+  border-radius: 6px;
+}
+
+.input::placeholder {
+  color: #767676;
+  opacity: 1;
+}
+
+.input:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* real disabled attribute */
+.input:disabled {
+  background-color: #e5e7eb;
+  color: #6b7280;
+  border-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* error prop -> aria-invalid (no padding change, so the size never jumps) */
+.input[aria-invalid="true"] {
+  border-color: #c62828;
+  box-shadow: inset 0 0 0 1px #c62828;
+}
+
+.input-message {
+  margin: 6px 0 0;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: var(--text, #595959);
+}
+
+.input-message-error {
+  color: #c62828;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .input {
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+}
+
+/* ========================================
+   1. DEFAULT INPUT
+======================================== */
+
+.input-default {
+  background-color: white;
+  color: #222;
+  border: 1px solid #757575;
+  border-radius: 6px;
+}
+
+/* ========================================
+   2. OUTLINE INPUT
+======================================== */
+
+.input-outline {
+  border: 2px solid blue;
+  padding: 11px 13px;
+}
+
+/* ========================================
+   3. FILLED INPUT
+======================================== */
+
+.input-filled {
+  background-color: #f1f5f9;
+  border: 1px solid transparent;
+  border-bottom: 2px solid #757575;
+  border-radius: 6px 6px 0 0;
+  padding: 12px 14px 11px;
+}
+
+.input-filled::placeholder {
+  color: #5f5f5f;
+}
+
+/* ========================================
+   4. UNDERLINE INPUT
+======================================== */
+
+.input-underline {
+  background-color: transparent;
+  color: var(--text-h, #222);
+  border: none;
+  border-bottom: 2px solid #757575;
+  border-radius: 0;
+  padding: 12px 2px 10px;
+}
+
+.input-underline::placeholder {
+  color: var(--text, #767676);
+}
+
+/* ========================================
+   5. ROUNDED INPUT
+======================================== */
+
+.input-rounded {
+  border-radius: 12px;
+}
+
+/* ========================================
+   6. PILL INPUT
+======================================== */
+
+.input-pill {
+  border-radius: 50px;
+  padding: 12px 20px;
+}
+
+/* ========================================
+   7. SUCCESS INPUT
+======================================== */
+
+.input-success {
+  border: 2px solid green;
+  padding: 11px 13px;
+}
+
+/* ========================================
+   8. DARK INPUT
+======================================== */
+
+.input-dark {
+  background-color: #111827;
+  color: white;
+  border: 1px solid #6b7280;
+}
+
+.input-dark::placeholder {
+  color: #9ca3af;
+}
+
+/* ========================================
+   9. GLOW INPUT
+======================================== */
+
+.input-glow {
+  border: 2px solid blue;
+  padding: 11px 13px;
+  box-shadow: 0 0 10px rgba(0, 0, 255, 0.35);
+}
+
+.input-glow:focus-visible {
+  box-shadow: 0 0 14px 3px rgba(0, 0, 255, 0.5);
+}
+
+/* ========================================
+   10. LARGE INPUT
+======================================== */
+
+.input-large {
+  font-size: 20px;
+  padding: 16px 18px;
+  border-radius: 8px;
+}
+
+/* ========================================
+   ERROR STATE (after the variants on purpose)
+======================================== */
+
+/* the underline variant has no side borders, so no inset ring */
+.input-underline[aria-invalid="true"] {
+  box-shadow: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .input-required,
+  .input-message-error {
+    color: #f87171;
+  }
+}

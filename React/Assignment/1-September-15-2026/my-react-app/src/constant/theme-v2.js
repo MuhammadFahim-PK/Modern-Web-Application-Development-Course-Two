@@ -72,29 +72,6 @@ const textStyles = {
 };
 
 // ================================
-// USER CARD STYLES  (classes live in components/ui/UserCard/UserCard.css)
-// ================================
-
-const userCardStyles = {
-  userCardDefault: "user-card-default",
-  userCardOutline: "user-card-outline",
-  userCardShadow: "user-card-shadow",
-  userCardDark: "user-card-dark",
-  userCardHorizontal: "user-card-horizontal",
-};
-
-// ================================
-// PRODUCT CARD STYLES  (classes live in components/ui/ProductCard/ProductCard.css)
-// ================================
-
-const productCardStyles = {
-  productCardDefault: "product-card-default",
-  productCardOutline: "product-card-outline",
-  productCardShadow: "product-card-shadow",
-  productCardDark: "product-card-dark",
-};
-
-// ================================
 // COLORS
 // ================================
 
@@ -202,8 +179,6 @@ export {
   inputStyles,
   selectStyles,
   textStyles,
-  userCardStyles,
-  productCardStyles,
   colors,
   fontSizes,
   fontWeights,

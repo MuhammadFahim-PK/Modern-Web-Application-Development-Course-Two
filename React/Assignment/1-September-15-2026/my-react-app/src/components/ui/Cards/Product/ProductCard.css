@@ -1,0 +1,171 @@
+/* ========================================
+   COMMON PRODUCT CARD STYLES
+   (shared by every variant, applied by productcard.jsx)
+   Colours are CSS variables, so a variant only has to change the variables.
+======================================== */
+
+.product-card {
+  --pc-bg: white;
+  --pc-text: #222;
+  --pc-muted: #595959;
+  --pc-border: #d1d5db;
+  --pc-error: #c62828;
+
+  position: relative; /* keeps the screen-reader-only text inside the card */
+  display: inline-flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 320px;
+  max-width: 100%;
+  margin: 10px;
+  overflow: hidden;
+  vertical-align: top;
+  font-family: Arial, sans-serif;
+  text-align: left;
+  background-color: var(--pc-bg);
+  color: var(--pc-text);
+  border: 1px solid var(--pc-border);
+  border-radius: 12px;
+}
+
+.product-card-image-box {
+  position: relative;
+}
+
+.product-card-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3; /* space is reserved before the image loads: no layout shift */
+  object-fit: cover;
+}
+
+.product-card-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  background-color: #111827;
+  color: white;
+  border-radius: 999px;
+}
+
+.product-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.product-card-name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--pc-text);
+}
+
+.product-card-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* max 3 lines keeps the cards the same height */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--pc-muted);
+}
+
+.product-card-price {
+  margin: 12px 0 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.product-card-old-price {
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--pc-muted);
+}
+
+/* text for screen readers only */
+.product-card-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* the Select component is 280px wide with margins, make it fill the card */
+.product-card-variant .select-wrapper {
+  width: 100%;
+  margin: 12px 0 0;
+}
+
+.product-card-variant .select-label {
+  color: var(--pc-text);
+}
+
+.product-card-variant .select-message-error {
+  color: var(--pc-error);
+}
+
+/* the Button component has a 10px margin, make it fill the card */
+.product-card-action {
+  margin-top: auto; /* pushes the button to the bottom in equal-height rows */
+  padding-top: 16px;
+}
+
+.product-card-action button {
+  width: 100%;
+  margin: 0;
+}
+
+/* ========================================
+   1. DEFAULT PRODUCT CARD
+======================================== */
+
+.product-card-default {
+  --pc-bg: white;
+  --pc-text: #222;
+  --pc-border: #d1d5db;
+}
+
+/* ========================================
+   2. OUTLINE PRODUCT CARD
+======================================== */
+
+.product-card-outline {
+  --pc-border: blue;
+  border-width: 2px;
+}
+
+/* ========================================
+   3. SHADOW PRODUCT CARD
+======================================== */
+
+.product-card-shadow {
+  --pc-border: #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ========================================
+   4. DARK PRODUCT CARD
+======================================== */
+
+.product-card-dark {
+  --pc-bg: #111827;
+  --pc-text: white;
+  --pc-muted: #9ca3af;
+  --pc-border: #374151;
+  --pc-error: #f87171;
+}

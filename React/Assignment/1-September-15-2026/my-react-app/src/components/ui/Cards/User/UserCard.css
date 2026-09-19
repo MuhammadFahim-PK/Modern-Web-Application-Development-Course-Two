@@ -1,0 +1,176 @@
+/* ========================================
+   COMMON USER CARD STYLES
+   (shared by every variant, applied by usercard.jsx)
+   Colours are CSS variables, so a variant only has to change the variables.
+======================================== */
+
+.user-card {
+  --uc-bg: white;
+  --uc-text: #222;
+  --uc-muted: #595959;
+  --uc-border: #d1d5db;
+  --uc-link: #1d4ed8;
+  --uc-initials-bg: #dbeafe;
+  --uc-initials-text: #1e3a8a;
+
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 320px;
+  max-width: 100%;
+  margin: 10px;
+  padding: 24px;
+  vertical-align: top;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: var(--uc-bg);
+  color: var(--uc-text);
+  border: 1px solid var(--uc-border);
+  border-radius: 12px;
+}
+
+.user-card-image,
+.user-card-initials {
+  flex-shrink: 0;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+}
+
+.user-card-image {
+  object-fit: cover;
+}
+
+.user-card-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  background-color: var(--uc-initials-bg);
+  color: var(--uc-initials-text);
+}
+
+.user-card-body {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.user-card-name {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--uc-text);
+}
+
+.user-card-role {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--uc-muted);
+}
+
+.user-card-details {
+  margin: 16px 0 0;
+  padding: 0;
+  text-align: left;
+}
+
+.user-card-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-top: 1px solid var(--uc-border);
+  font-size: 14px;
+}
+
+.user-card-label {
+  flex-shrink: 0;
+  color: var(--uc-muted);
+}
+
+.user-card-value {
+  margin: 0;
+  text-align: right;
+  overflow-wrap: anywhere; /* long emails never break the card */
+}
+
+.user-card-value a {
+  color: var(--uc-link);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* ========================================
+   1. DEFAULT USER CARD
+======================================== */
+
+.user-card-default {
+  --uc-bg: white;
+  --uc-text: #222;
+  --uc-border: #d1d5db;
+}
+
+/* ========================================
+   2. OUTLINE USER CARD
+======================================== */
+
+.user-card-outline {
+  --uc-border: blue;
+  border-width: 2px;
+  padding: 23px; /* 2px border, same size as the default card */
+}
+
+/* ========================================
+   3. SHADOW USER CARD
+======================================== */
+
+.user-card-shadow {
+  --uc-border: #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ========================================
+   4. DARK USER CARD
+======================================== */
+
+.user-card-dark {
+  --uc-bg: #111827;
+  --uc-text: white;
+  --uc-muted: #9ca3af;
+  --uc-border: #374151;
+  --uc-link: #93c5fd;
+  --uc-initials-bg: #1e3a8a;
+  --uc-initials-text: #dbeafe;
+}
+
+/* ========================================
+   5. HORIZONTAL USER CARD
+======================================== */
+
+.user-card-horizontal {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+  width: 520px;
+  text-align: left;
+}
+
+.user-card-horizontal .user-card-body {
+  margin-top: 0;
+}
+
+/* small screens: horizontal falls back to the vertical layout */
+@media (max-width: 560px) {
+  .user-card-horizontal {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .user-card-horizontal .user-card-body {
+    margin-top: 16px;
+  }
+}

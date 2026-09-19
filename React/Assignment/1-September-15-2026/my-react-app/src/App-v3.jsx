@@ -2,21 +2,15 @@ import { useState } from 'react'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
-import avatarImg from './assets/images/avatar-placeholder.svg'
-import productImg from './assets/images/product-placeholder.svg'
 import Button from "./components/ui/Button/button"
 import Input from "./components/ui/Input/input"
 import Select from "./components/ui/Select/select"
 import Text from "./components/ui/Text/text"
-import UserCard from "./components/ui/Cards/User/usercard"
-import ProductCard from "./components/ui/Cards/Product/productcard"
 import {
   btnStyles,
   inputStyles,
   selectStyles,
   textStyles,
-  userCardStyles,
-  productCardStyles,
   colors,
   fontFamilies,
   fontSizes,
@@ -33,29 +27,11 @@ const countryOptions = [
   { value: "us", label: "United States" },
 ];
 
-const sizeOptions = [
-  { value: "s", label: "Small" },
-  { value: "m", label: "Medium" },
-  { value: "l", label: "Large" },
-  { value: "xl", label: "X-Large (sold out)", disabled: true },
-];
-
-const colorOptions = [
-  { value: "black", label: "Black" },
-  { value: "navy", label: "Navy" },
-  { value: "olive", label: "Olive (sold out)", disabled: true },
-];
-
 function App() {
   const [count, setCount] = useState(0)
   const [fullName, setFullName] = useState("")
   const [country, setCountry] = useState("")
   const [counter, setCounter] = useState(0)
-
-  const [cartCount, setCartCount] = useState(0)
-
-  // called by ProductCard with { name, price, variant }
-  const handleAddToCart = () => setCartCount((cartCount) => cartCount + 1)
 
   // one handler for all 8 buttons: pass +1, -1, +5, -5 ...
   const changeCounter = (amount) => setCounter((counter) => counter + amount)
@@ -492,130 +468,6 @@ function App() {
             fontFamily={fontFamilies.serif}
             fontStyle={fontStyles.italic}
             textAlign={textAlign.center}
-          />
-        </div>
-      </section>
-
-      <section aria-labelledby="demo-user-cards">
-        <Text
-          as="h2"
-          id="demo-user-cards"
-          title="User cards"
-          className={textStyles.textSubheading}
-        />
-        <div className="buttons-box">
-          <UserCard
-            className={userCardStyles.userCardDefault}
-            image={avatarImg}
-            name="Sara Ahmed"
-            role="Product Designer"
-            email="sara.ahmed@example.com"
-            phone="+1 555 0100"
-            city="Lisbon"
-            age={28}
-          />
-
-          <UserCard
-            className={userCardStyles.userCardOutline}
-            name="Daniel Carter"
-            role="Frontend Developer"
-            email="daniel.carter@example.com"
-            phone="+1 555 0101"
-            city="Denver"
-            age={34}
-          />
-
-          <UserCard
-            className={userCardStyles.userCardShadow}
-            image={avatarImg}
-            name="Mei Tanaka"
-            role="Data Analyst"
-            email="mei.tanaka@example.com"
-            phone="+1 555 0102"
-            city="Osaka"
-            age={31}
-          />
-
-          <UserCard
-            className={userCardStyles.userCardDark}
-            image={avatarImg}
-            name="Omar Hassan"
-            role="Project Manager"
-            email="omar.hassan@example.com"
-            phone="+1 555 0103"
-            city="Cairo"
-            age={39}
-          />
-
-          <UserCard
-            className={userCardStyles.userCardHorizontal}
-            image={avatarImg}
-            name="Lena Fischer"
-            role="Support Lead"
-            email="lena.fischer@example.com"
-            phone="+1 555 0104"
-            city="Berlin"
-            age={42}
-            details={[{ label: "Company", value: "Northwind" }]}
-          />
-        </div>
-      </section>
-
-      <section aria-labelledby="demo-product-cards">
-        <Text
-          as="h2"
-          id="demo-product-cards"
-          title="Product cards"
-          className={textStyles.textSubheading}
-        />
-        <Text
-          role="status"
-          title={`Cart items: ${cartCount}`}
-          className={textStyles.textBody}
-        />
-        <div className="buttons-box">
-          <ProductCard
-            className={productCardStyles.productCardDefault}
-            image={productImg}
-            name="Classic T-Shirt"
-            description="Soft combed cotton with a relaxed fit. Machine washable."
-            price="$29.00"
-            badge="New"
-            variantLabel="Size"
-            variants={sizeOptions}
-            onAddToCart={handleAddToCart}
-          />
-
-          <ProductCard
-            className={productCardStyles.productCardShadow}
-            image={productImg}
-            name="Wireless Headphones"
-            description="Over-ear headphones with 30-hour battery life and a built-in microphone."
-            price="$79.00"
-            oldPrice="$99.00"
-            badge="Sale"
-            onAddToCart={handleAddToCart}
-          />
-
-          <ProductCard
-            className={productCardStyles.productCardDark}
-            image={productImg}
-            name="City Backpack"
-            description="Water-resistant 20L backpack with a padded laptop sleeve and two side pockets."
-            price="$59.00"
-            variantLabel="Color"
-            variants={colorOptions}
-            onAddToCart={handleAddToCart}
-          />
-
-          <ProductCard
-            className={productCardStyles.productCardOutline}
-            image={productImg}
-            name="Steel Water Bottle"
-            description="Insulated bottle that keeps drinks cold for 24 hours."
-            price="$24.00"
-            inStock={false}
-            onAddToCart={handleAddToCart}
           />
         </div>
       </section>

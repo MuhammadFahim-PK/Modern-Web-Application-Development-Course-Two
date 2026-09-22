@@ -14,11 +14,6 @@ import "./Input.css";
     onChange={(e) => setEmail(e.target.value)}
   />
   Any other prop (disabled, required, maxLength, autoComplete...) is passed to <input>.
-
-  For a multi-line field (a "full post", a message, an address...), add
-  multiline. It renders a <textarea> instead of <input> and takes an optional
-  rows (default 4). "type" is ignored when multiline is true.
-    <Input label="Full post" multiline rows={6} value={fullPost} onChange={...} />
 */
 
 function Input({
@@ -34,8 +29,6 @@ function Input({
   error,
   disabled,
   required,
-  multiline = false,
-  rows = 4,
   ...rest
 }) {
   const autoId = useId();
@@ -57,37 +50,20 @@ function Input({
         </label>
       )}
 
-      {multiline ? (
-        <textarea
-          id={inputId}
-          name={name}
-          rows={rows}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          className={`input input-textarea ${className}`}
-          disabled={disabled}
-          required={required}
-          aria-invalid={error ? "true" : undefined}
-          aria-describedby={message ? messageId : undefined}
-          {...rest}
-        />
-      ) : (
-        <input
-          id={inputId}
-          name={name}
-          type={type}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          className={`input ${className}`}
-          disabled={disabled}
-          required={required}
-          aria-invalid={error ? "true" : undefined}
-          aria-describedby={message ? messageId : undefined}
-          {...rest}
-        />
-      )}
+      <input
+        id={inputId}
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className={`input ${className}`}
+        disabled={disabled}
+        required={required}
+        aria-invalid={error ? "true" : undefined}
+        aria-describedby={message ? messageId : undefined}
+        {...rest}
+      />
 
       {message && (
         <p

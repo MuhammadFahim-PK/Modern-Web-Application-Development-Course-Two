@@ -1,0 +1,108 @@
+/* ========================================
+   COMMON BLOG CARD STYLES
+   (shared by every variant, applied by blogpostcard.jsx)
+   Colours are CSS variables, so a variant only has to change the variables.
+======================================== */
+
+.blog-card {
+  --bc-bg: white;
+  --bc-text: #222;
+  --bc-muted: #595959;
+  --bc-border: #d1d5db;
+
+  display: inline-flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 320px;
+  max-width: 100%;
+  margin: 10px;
+  padding: 20px;
+  vertical-align: top;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  background-color: var(--bc-bg);
+  color: var(--bc-text);
+  border: 1px solid var(--bc-border);
+  border-radius: 12px;
+}
+
+.blog-card-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--bc-text);
+}
+
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--bc-muted);
+}
+
+.blog-card-dot {
+  color: var(--bc-border);
+}
+
+.blog-card-description {
+  margin: 12px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.blog-card-full {
+  margin: 12px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre-line; /* keeps paragraph breaks typed into the textarea */
+}
+
+/* the Button component has a 10px margin; align it back to the card's edge */
+.blog-card > button {
+  align-self: flex-start;
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+/* ========================================
+   1. DEFAULT BLOG CARD
+======================================== */
+
+.blog-card-default {
+  --bc-bg: white;
+  --bc-text: #222;
+  --bc-border: #d1d5db;
+}
+
+/* ========================================
+   2. OUTLINE BLOG CARD
+======================================== */
+
+.blog-card-outline {
+  --bc-border: blue;
+  border-width: 2px;
+  padding: 19px; /* 2px border, same size as the default card */
+}
+
+/* ========================================
+   3. SHADOW BLOG CARD
+======================================== */
+
+.blog-card-shadow {
+  --bc-border: #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ========================================
+   4. DARK BLOG CARD
+======================================== */
+
+.blog-card-dark {
+  --bc-bg: #111827;
+  --bc-text: white;
+  --bc-muted: #9ca3af;
+  --bc-border: #374151;
+}

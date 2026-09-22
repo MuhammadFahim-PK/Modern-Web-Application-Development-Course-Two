@@ -95,17 +95,6 @@ const productCardStyles = {
 };
 
 // ================================
-// BLOG CARD STYLES  (classes live in components/ui/BlogPostCard/BlogPostCard.css)
-// ================================
-
-const blogCardStyles = {
-  blogCardDefault: "blog-card-default",
-  blogCardOutline: "blog-card-outline",
-  blogCardShadow: "blog-card-shadow",
-  blogCardDark: "blog-card-dark",
-};
-
-// ================================
 // COLORS
 // ================================
 
@@ -215,7 +204,6 @@ export {
   textStyles,
   userCardStyles,
   productCardStyles,
-  blogCardStyles,
   colors,
   fontSizes,
   fontWeights,

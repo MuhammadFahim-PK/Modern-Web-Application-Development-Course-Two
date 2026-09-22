@@ -10,7 +10,6 @@ import Select from "./components/ui/Select/select"
 import Text from "./components/ui/Text/text"
 import UserCard from "./components/ui/Cards/User/usercard"
 import ProductCard from "./components/ui/Cards/Product/productcard"
-import BlogPosts from "./pages/BlogPosts/blogposts"
 import {
   btnStyles,
   inputStyles,
@@ -619,10 +618,6 @@ function App() {
             onAddToCart={handleAddToCart}
           />
         </div>
-      </section>
-
-      <section id="demo-blog">
-        <BlogPosts />
       </section>
 
       <div className="ticks"></div>

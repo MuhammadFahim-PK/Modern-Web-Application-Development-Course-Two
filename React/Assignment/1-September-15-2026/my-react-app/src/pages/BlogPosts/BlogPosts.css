@@ -1,0 +1,25 @@
+/* ========================================
+   BLOG POSTS PAGE LAYOUT
+======================================== */
+
+.blog-posts-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 320px;
+  margin: 0 auto 20px;
+}
+
+/* Input/Button already carry their own 10px margin; stack them full-width.
+   Targeting their own classes (not a bare child selector) keeps this rule
+   winning regardless of which CSS file Vite happens to inject first. */
+.blog-posts-form .input-wrapper,
+.blog-posts-form button {
+  width: 100%;
+}
+
+.blog-posts-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

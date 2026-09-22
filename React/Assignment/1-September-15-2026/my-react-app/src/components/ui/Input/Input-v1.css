@@ -78,14 +78,6 @@
   }
 }
 
-/* multiline field (Input with the `multiline` prop) */
-.input-textarea {
-  min-height: 120px;
-  line-height: 1.5;
-  resize: vertical;
-  font-family: Arial, sans-serif;
-}
-
 /* ========================================
    1. DEFAULT INPUT
 ======================================== */

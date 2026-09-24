@@ -68,32 +68,6 @@
 }
 
 /* ========================================
-   ACTIONS ROW (Like, Dislike, Edit, Delete / Save, Cancel)
-======================================== */
-
-.blog-card-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--bc-border);
-}
-
-/* the action buttons keep their own 10px margin from Button.css; cancel it
-   here so the row's own `gap` controls the spacing instead */
-.blog-card-actions button {
-  margin: 0;
-}
-
-/* while editing, the card shows the Input component instead of plain text;
-   the Select/Input wrapper is 280px by default, make it fill the card */
-.blog-card .input-wrapper {
-  width: 100%;
-  margin: 0 0 12px;
-}
-
-/* ========================================
    1. DEFAULT BLOG CARD
 ======================================== */
 

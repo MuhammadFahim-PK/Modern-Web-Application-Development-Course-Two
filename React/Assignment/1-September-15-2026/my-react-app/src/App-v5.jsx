@@ -84,10 +84,6 @@ function App() {
         </button>
       </section>
 
-      <section id="demo-blog">
-        <BlogPosts />
-      </section>
-
       <section className="buttons-box">
         <Button
           className={btnStyles.btnFilled}
@@ -625,7 +621,9 @@ function App() {
         </div>
       </section>
 
-
+      <section id="demo-blog">
+        <BlogPosts />
+      </section>
 
       <div className="ticks"></div>
 

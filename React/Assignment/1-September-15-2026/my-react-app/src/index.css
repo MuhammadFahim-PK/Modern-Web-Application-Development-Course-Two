@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -50,14 +52,23 @@
   }
 }
 
-body {
+*,
+*::before,
+*::after {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  
 }
 
 #root {
-  width: 1600px;
+  width: 100vw;
   max-width: 100%;
   margin: 0 auto;
+  padding: 0 10.625em;
   text-align: center;
   border-inline: 1px solid var(--border);
   min-height: 100svh;

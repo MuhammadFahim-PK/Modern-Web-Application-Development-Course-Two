@@ -19,16 +19,6 @@ const btnStyles = {
   btnScale: "btn-scale",
   btnEffect: "btn-effect",
   btnLink: "btn-link",
-
-  // Compact icon+text action buttons for card footers (Like, Dislike, Edit, Delete)
-  btnLike: "btn-like",
-  btnLikeActive: "btn-like-active",
-  btnDislike: "btn-dislike",
-  btnDislikeActive: "btn-dislike-active",
-  btnEdit: "btn-edit",
-  btnDelete: "btn-delete",
-  btnSave: "btn-save",
-  btnCancel: "btn-cancel",
 };
 
 // ================================

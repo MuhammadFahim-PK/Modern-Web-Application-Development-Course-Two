@@ -20,9 +20,6 @@ function BlogPosts() {
         "The alarm was never the problem, staying up was. Moving my phone " +
         "charger out of the bedroom fixed more than any Fajr app did.",
       date: "2026-09-10",
-      likes: 4,
-      dislikes: 0,
-      reaction: null,
     },
     {
       title: "Have Breakfast Before You Check Your Phone",
@@ -31,9 +28,6 @@ function BlogPosts() {
         "I used to reach for my phone before I even sat up. Now breakfast " +
         "comes first, and the first hour of the day feels like mine again.",
       date: "2026-09-18",
-      likes: 1,
-      dislikes: 1,
-      reaction: null,
     },
   ]);
 
@@ -42,69 +36,18 @@ function BlogPosts() {
   const [fullPost, setFullPost] = useState("");
 
   const addBlogPost = () => {
-    if (blogTitle.trim() === "" || shortDescription.trim() === "") {
-      return alert("Add Value");
-    }
+    if (blogTitle == "" || shortDescription == "") return alert("Add Value");
 
     let obj = {
-      title: blogTitle.trim(),
-      shortDescription: shortDescription.trim(),
-      fullPost: fullPost.trim(),
+      title: blogTitle,
+      shortDescription: shortDescription,
+      fullPost: fullPost,
       date: new Date(), // current date: today, at the moment the post is added
-      likes: 0,
-      dislikes: 0,
-      reaction: null,
     };
     setPosts([obj, ...posts]);
     setBlogTitle("");
     setShortDescription("");
     setFullPost("");
-  };
-
-  // toggling: clicking Like again removes it; switching from Dislike moves the count over
-  const handleLike = (index) => {
-    setPosts((posts) =>
-      posts.map((post, i) => {
-        if (i !== index) return post;
-        if (post.reaction === "like") {
-          return { ...post, reaction: null, likes: post.likes - 1 };
-        }
-        return {
-          ...post,
-          reaction: "like",
-          likes: post.likes + 1,
-          dislikes: post.reaction === "dislike" ? post.dislikes - 1 : post.dislikes,
-        };
-      }),
-    );
-  };
-
-  const handleDislike = (index) => {
-    setPosts((posts) =>
-      posts.map((post, i) => {
-        if (i !== index) return post;
-        if (post.reaction === "dislike") {
-          return { ...post, reaction: null, dislikes: post.dislikes - 1 };
-        }
-        return {
-          ...post,
-          reaction: "dislike",
-          dislikes: post.dislikes + 1,
-          likes: post.reaction === "like" ? post.likes - 1 : post.likes,
-        };
-      }),
-    );
-  };
-
-  // updatedFields = { title, shortDescription, fullPost }, already validated by the card
-  const handleEditPost = (index, updatedFields) => {
-    setPosts((posts) =>
-      posts.map((post, i) => (i === index ? { ...post, ...updatedFields } : post)),
-    );
-  };
-
-  const handleDeletePost = (index) => {
-    setPosts((posts) => posts.filter((_, i) => i !== index));
   };
 
   return (
@@ -151,13 +94,6 @@ function BlogPosts() {
               shortDescription={data.shortDescription}
               fullPost={data.fullPost}
               date={data.date}
-              likes={data.likes}
-              dislikes={data.dislikes}
-              reaction={data.reaction}
-              onLike={() => handleLike(ind)}
-              onDislike={() => handleDislike(ind)}
-              onEdit={(updatedFields) => handleEditPost(ind, updatedFields)}
-              onDelete={() => handleDeletePost(ind)}
               className={blogCardStyles.blogCardShadow}
             />
           );

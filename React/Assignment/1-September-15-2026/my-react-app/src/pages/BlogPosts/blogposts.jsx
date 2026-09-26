@@ -108,7 +108,7 @@ function BlogPosts() {
   };
 
   return (
-    <div>
+    <section id="demo-blog" className="section">
       <Text title={"Blog"} as="h2" className={textStyles.textHeading} />
 
       <div className="blog-posts-form">
@@ -163,7 +163,7 @@ function BlogPosts() {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }
 

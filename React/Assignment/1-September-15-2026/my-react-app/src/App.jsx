@@ -1,175 +1,96 @@
-import { useState, useEffect } from "react"
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import Button from "./components/ui/Button/button"
-import BlogPosts from "./pages/BlogPosts/blogposts"
-import SampleButton from "./pages/Component-Page/samplebutton"
-import SampleCounter from "./pages/Component-Page/samplecounter"
-import SampleForm from "./pages/Component-Page/sampleform"
-import SampleText from "./pages/Component-Page/sampletext"
-import SampleUserCards from "./pages/Component-Page/sampleusercards"
-import SampleProductCards from "./pages/Component-Page/sampleproductcards"
-import { btnStyles } from "./constant/theme";
-import './App.css'
-
-// one entry per switchable section: the button label, and the component it shows
-const SECTIONS = [
-  { key: "counter", label: "Counter", Component: SampleCounter },
-  { key: "buttons", label: "Buttons", Component: SampleButton },
-  { key: "blog", label: "Blog", Component: BlogPosts },
-  { key: "form", label: "Form", Component: SampleForm },
-  { key: "text", label: "Text", Component: SampleText },
-  { key: "user-cards", label: "User Cards", Component: SampleUserCards },
-  { key: "product-cards", label: "Product Cards", Component: SampleProductCards },
-];
-
-const STORAGE_KEY = "activeSection";
+import { useEffect, useState } from "react";
+import { pollQuestions } from "./constant/pollQuestions";
+import Loading from "./components/ui/Loading/loading";
+import EmptyState from "./components/ui/EmptyState/emptystate";
+import Poll from "./pages/Poll/poll";
+import PollResults from "./pages/PollResults/pollresults";
 
 function App() {
-  // read the last-viewed section once, on first render (falls back to the first tab)
-  const [activeSection, setActiveSection] = useState(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      return SECTIONS.some((section) => section.key === saved) ? saved : SECTIONS[0].key;
-    } catch {
-      return SECTIONS[0].key;
-    }
-  });
+  // Store all questions
+  const [questions, setQuestions] = useState([]);
 
-  // side effects that should re-run whenever the active section changes:
-  // update the browser tab title, and remember the choice for next time
+  // Current question index
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+
+  // Store user's answers
+  const [answers, setAnswers] = useState({});
+
+  // Show results after all questions
+  const [showResults, setShowResults] = useState(false);
+
+  // Loading state
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    const current = SECTIONS.find((section) => section.key === activeSection);
-    document.title = current ? `Demo — ${current.label}` : "Demo";
+    // Currently local data. Later this can be replaced with an API call.
+    setQuestions(pollQuestions);
+    setLoading(false);
+  }, []);
 
-    try {
-      localStorage.setItem(STORAGE_KEY, activeSection);
-    } catch {
-      // localStorage can be unavailable (private browsing, storage full); the
-      // page still works, it just won't remember the choice next time
+  if (loading) {
+    return <Loading message="Loading poll..." />;
+  }
+
+  if (showResults) {
+    return <PollResults questions={questions} answers={answers} />;
+  }
+
+  if (questions.length === 0) {
+    return (
+      <EmptyState title="No questions available" message="Please try again later." />
+    );
+  }
+
+  const question = questions[currentQuestion];
+  const selectedAnswer = answers[question.id];
+  const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+  // Select answer
+  function selectAnswer(optionId) {
+    setAnswers((previousAnswers) => ({
+      ...previousAnswers,
+      [question.id]: optionId,
+    }));
+  }
+
+  // Next question / Submit
+  function handleNext() {
+    // Don't allow user to continue without answering
+    if (!selectedAnswer) {
+      return;
     }
-  }, [activeSection]);
 
-  const ActiveComponent = SECTIONS.find((section) => section.key === activeSection)?.Component;
+    // If this is the last question
+    if (currentQuestion === questions.length - 1) {
+      setShowResults(true);
+      return;
+    }
+
+    // Move to next question
+    setCurrentQuestion((previousQuestion) => previousQuestion + 1);
+  }
+
+  // Previous question
+  function handlePrevious() {
+    if (currentQuestion === 0) {
+      return;
+    }
+
+    setCurrentQuestion((previousQuestion) => previousQuestion - 1);
+  }
 
   return (
-    <>
-      <section id="center" className="section">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-      </section>
-
-      <nav className="section section-nav" aria-label="Demo sections">
-        {SECTIONS.map(({ key, label }) => (
-          <Button
-            key={key}
-            title={label}
-            className={activeSection === key ? btnStyles.btnFilled : btnStyles.btnOutline}
-            aria-pressed={activeSection === key}
-            onClick={() => setActiveSection(key)}
-          />
-        ))}
-      </nav>
-
-      {ActiveComponent && <ActiveComponent />}
-
-      <div className="ticks"></div>
-
-      <section id="next-steps" className="section">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer" className="section"></section>
-    </>
-  )
+    <Poll
+      question={question}
+      currentQuestion={currentQuestion}
+      totalQuestions={questions.length}
+      selectedAnswer={selectedAnswer}
+      progress={progress}
+      onSelectAnswer={selectAnswer}
+      onNext={handleNext}
+      onPrevious={handlePrevious}
+    />
+  );
 }
 
-export default App
+export default App;
